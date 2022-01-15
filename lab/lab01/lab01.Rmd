@@ -211,6 +211,9 @@ You'll also run into problems that will ask you to explain your answer in a coup
 
 I am looking forward to...
 
+<!-- BEGIN SOLUTION NO PROMPT-->
+learning biostatistics!
+<!-- END SOLUTION -->
 
 Now, at the end of the assignment, you should go back through and run each code chunk to be sure you passed all of your tests. On this assignment, that only means that `p1`, `p2`, and `p3` should all equal 5. One way to check that works well is to click the grey downward facing arrow in the right corner of the code chunk. This will run all previous code chunks so all of your answers are up to date.
 
@@ -221,14 +224,25 @@ Run these next cells to correct all of your answers.
 p1 <- 5
 ```
 
+```{r}
+. = ottr::check("tests/p1.R")
+```
+
 ```{r correct-p2}
 p2 <- 5
+```
+
+```{r}
+. = ottr::check("tests/p2.R")
 ```
 
 ```{r correct-p3}
 p3 <- 5
 ```
 
+```{r}
+. = ottr::check("tests/p3.R")
+```
 ### A Note About the Autograder
 
 The autograder is meant to be used as a sanity check for your work, not as an absolute check of correctness. This is because, in the real world, you won't have an autograder to check your analysis/code... unless you write your own test cases (which is recommended, but we won't be covering that in this course). However, **programming is difficult**, and we want to provide you with the best resources to succeed so we will write all the test cases in labs. Since the problem sets are not being collected for credit, we will also write all the test cases for these. Our goal is that you won't rely too much on the autograder for the problem sets - you can try out a few things and try to intuitively solve the problems. Ask lots of questions - we're excited for you to start the journey of being a data analyst.
