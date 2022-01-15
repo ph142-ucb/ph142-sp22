@@ -4,10 +4,10 @@ test_metadata = "
 cases:
 - hidden: false
   name: p3a
-  points: 1
+  points: 0
 - hidden: false
   name: p3b
-  points: 1
+  points: 0
 name: p3
 
 "

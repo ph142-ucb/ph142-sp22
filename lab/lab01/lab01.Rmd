@@ -192,8 +192,6 @@ p2 <- 100 + 42
 ```{r}
 . = ottr::check("tests/p2.R")
 ```
-
-
 ```{r five-wrong-again}
 # This is a REALLY WRONG answer. 
 p3 <- "Stanfurd"
