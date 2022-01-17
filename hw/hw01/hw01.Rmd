@@ -185,7 +185,7 @@ p5
 **6. [1 point] Rewrite the chunk of code that selects columns starting with "sl" (in question 5) using the pipe operator. Assign this to `sleep_sl`.**
 
 ```{r}
-sleep_sl <- NULL # YOUR CHOICE HERE
+sleep_sl <- NULL # YOUR CODE HERE
 sleep_sl
 
 # YOUR CODE HERE
@@ -200,7 +200,7 @@ sleep_sl
 **7. [1 point] Filter the original `sleep` dataset to include rows with mammals that sleep a total of more than 16 hours. Assign this to `sleep_over16`.**
 
 ```{r}
-sleep_over16 <- NULL # YOUR CHOICE HERE
+sleep_over16 <- NULL # YOUR CODE HERE
 sleep_over16
 
 # YOUR CODE HERE
@@ -215,7 +215,7 @@ sleep_over16
 **8. [2 points] Filter the rows to include mammals that sleep a total of more than 16 hours and have a body weight of greater than 1 kilogram. Assign this to `sleep_mammals`.**
 
 ```{r}
-sleep_mammals <- NULL # YOUR CHOICE HERE
+sleep_mammals <- NULL # YOUR CODE HERE
 sleep_mammals
 
 # YOUR CODE HERE
@@ -230,7 +230,7 @@ sleep_mammals
 **9. [1 point] Suppose you are specifically interested in the sleep times of horses and giraffes. Use the original `sleep` dataset and assign `sleep_hg` to a dataframe that only includes horses and giraffes.**
 
 ```{r}
-sleep_hg <- NULL # YOUR CHOICE HERE
+sleep_hg <- NULL # YOUR CODE HERE
 sleep_hg
 
 # YOUR CODE HERE
@@ -245,7 +245,7 @@ sleep_hg
 **10. [1 point] Order the original dataset from shortest sleep time to longest sleep time. Assign this to `sleep_time`.**
 
 ```{r}
-sleep_time <- NULL # YOUR CHOICE HERE
+sleep_time <- NULL # YOUR CODE HERE
 sleep_time
 
 # YOUR CODE HERE
@@ -261,7 +261,7 @@ sleep_time
 **11. [1 point] Now order the original dataset from longest to shortest sleep time. Assign this to `sleep_rev`.**
 
 ```{r}
-sleep_rev <- NULL # YOUR CHOICE HERE
+sleep_rev <- NULL # YOUR CODE HERE
 sleep_rev
 
 # YOUR CODE HERE
@@ -276,7 +276,7 @@ sleep_rev
 **12. [2 points] Suppose you are interested in the order of sleep time (longest to shortest), but according to whether the animal is a carnivore, herbivore, or omnivore. Write the code that orders sleep time according to the animal's type of `-vore`. Call this `sleep_time_rev`.**
 
 ```{r}
-sleep_time_rev <- NULL # YOUR CHOICE HERE
+sleep_time_rev <- NULL # YOUR CODE HERE
 sleep_time_rev
 
 # YOUR CODE HERE
@@ -291,7 +291,7 @@ sleep_time_rev
 **13. [1 point] Create a new column called `rem_proportion` which is the ratio of rem sleep to total amount of sleep. Assign this new dataframe to `sleep_ratio`.**
 
 ```{r}
-sleep_ratio <- NULL # YOUR CHOICE HERE
+sleep_ratio <- NULL # YOUR CODE HERE
 sleep_ratio
 
 # YOUR CODE HERE
@@ -306,7 +306,7 @@ sleep_ratio
 **14. [1 point] Add another column to the `sleep_ratio` dataset called `bodywt_grams` which is the bodywt column in grams. Call this new dataframe `sleep_bw`.**
 
 ```{r}
-sleep_bw <- NULL # YOUR CHOICE HERE
+sleep_bw <- NULL # YOUR CODE HERE
 sleep_bw
 
 # YOUR CODE HERE
@@ -321,7 +321,7 @@ sleep_bw
 **15. [1 point] Calculate the average sleep time across all the animals in the dataset using a `dplyr` function and label this value `sleep_avg`. Assign this one value to a dataframe called `avg_sleep_time`.**
 
 ```{r}
-avg_sleep_time <- NULL # YOUR CHOICE HERE
+avg_sleep_time <- NULL # YOUR CODE HERE
 avg_sleep_time
 
 # YOUR CODE HERE
@@ -336,7 +336,7 @@ avg_sleep_time
 **16. [2 points] Calculate the average sleep time for each type of "-vore". Hint: you'll need to use two `dplyr` functions! Name the columns of the dataframe `vore` and `sleep_avg` and assign the dataframe to `avg_by_vore`.**
 
 ```{r}
-avg_by_vore <- NULL # YOUR CHOICE HERE
+avg_by_vore <- NULL # YOUR CODE HERE
 avg_by_vore
 
 # YOUR CODE HERE
