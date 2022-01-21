@@ -19,7 +19,7 @@ name: p14
 "
 
 test_that("p14a", {
-  expect_true(is.data.frame(sleep_bw))
+  expect_true(is.data.frame(sleep_r_bw))
   print("p14a: Checking `sleep_bw` is a dataframe")
 })
 
@@ -34,6 +34,6 @@ test_that("p14c", {
 })
 
 test_that("p14d", {
-  expect_true(all.equal(sleep_bw$bodywt_grams[1], 50000, 0.01))
+  expect_true(all.equal(sleep_r_bw$bodywt_grams[1], 50000, 0.01))
   print("p14c: Checking bodyweight is in grams")
 })
