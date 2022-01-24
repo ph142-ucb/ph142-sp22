@@ -1,0 +1,69 @@
+---
+title: "l03-additional-info-geom_bar"
+output: html_document
+---
+
+In today's lecture there was a question about what happens when we do not use stat="Identity" in a geom_bar statement.
+
+The code shown in lecture was using the infectious disease data in the Ch01_ID-data.csv dataset.
+
+The plot for that looked like this:
+
+```{r make-bar-chart}
+library(readr)
+id_data <- read_csv("Ch01_ID-data.csv")
+library(ggplot2)
+ggplot(id_data, aes(x = disease, y = percent_cases)) +
+  geom_bar(stat="Identity")
+```
+
+
+the `stat="Identity"  designation tells the geom_bar function that we want to over-ride the default setting and use the actual values stored in `percent_cases` to determine the height of the bars.  If we do not add `stat="Identity"`  the code will not run:
+
+
+
+You will get a message that says  "Error: stat_count() can only have an x or y aesthetic."
+
+This is because the default for geom_bar is to take one X or Y variable and count the number of occurrences for that variable.  If we try that with our x variable, notice what happens:
+
+```{r nostat2}
+ggplot(id_data, aes(x = disease)) +
+  geom_bar()
+```
+
+
+This is because R has "counted" the number of times each value for the variable 'disease' shows up in the dataset.  
+But remember the structure of our data frame:
+
+
+```{r structure}
+id_data
+```
+
+Each line in the dataset captures the aggregated data for that disease, so each value for the variable `disease` appears only one time in the dataset.  
+
+Likewise if we try to use geom_bar for `percent_cases` we get the following:
+
+
+```{r nostat-cases}
+ggplot(id_data, aes(percent_cases)) +
+  geom_bar()
+```
+
+R is counting how many times each value for `percent_cases` appears in the data.  
+
+If we had a dataframe/dataset where each line/row represented one reported case of an infectious disease and we had a separate column indicating the disease then we might use the geom_bar() without stat="Identity" to have R summarize for us the number of cases in each category.  
+
+For example, if I had this dataset:
+
+```{r }
+id_data_long <- read_csv("id_data_long.csv")
+head(id_data_long)
+dim(id_data_long)
+```
+Notice the structure of the data.  Now, if I use geom_bar I would use the syntax without stat="Identity" as follows:
+
+```{r}
+ggplot(id_data_long, aes(x = disease)) +
+  geom_bar()
+```
