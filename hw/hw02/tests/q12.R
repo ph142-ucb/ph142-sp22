@@ -22,7 +22,7 @@ test_that("p12a", {
 
 test_that("p12b", {
   expect_true(rlang::quo_get_expr(p12$mapping$y) == "CS_rate_100")
-  print("Checking: CS_rate_100 is on the x-axis")
+  print("Checking: CS_rate_100 is on the y-axis")
 })
 
 test_that("p12c", {
