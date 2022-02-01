@@ -1,0 +1,123 @@
+---
+title: "causality and confounding"
+output: html_document
+---
+
+
+###Counterfactuals
+
+![Observed and Unobserved](../Images/counterb.png)
+
+
+###The "Ideal Experiment"
+This is a hypothetical study which, if we could actually conduct it, would allow us to infer causality
+
++ We expose all individuals to a treatment
++ We observe the outcomes for these exposed individuals
++ Roll back the clock
++ We prevent all individuals from getting the treatment
++ We observe the outcomes for these unexposed individuals
+
+In this "experiment" everything in the universe remains the same except our exposure of interest, which we observe before the outcomes
+
+
+###How do we approximate the "ideal"?
+
+Obviously in the real world we cannot control time, and often we cannot control exposures.
+What we do instead is use the data we do have to approximate the ideal.
+
+We can think about this as a missing data problem:
+If we observe a group of people who received treatment, what we want is to fill in the missing data on what would have happened if that same group of people had not received treatment.  
+This unobserved data is called the **counterfactual**.
+
+###Where to get the missing data?
+In most studies we have:
+  
+  observed probability that the outcome (Y) = disease (1) among people who did get the treatment(T=1)
+
+  P(Y=1|T=1)
+  
+  and observed probability of the outcome among people who did not get the treatment
+  
+  P(Y=1|T=0)
+
+If the people who did get the treatment are the same in all other ways as those who did not get the treatment 
+then we can use their experience to approximate what would have happend in the 'ideal' experiment.
+This is the underlying rationale for the randomized trial, if we are assigning treatment with equal probability to all people then the mix of other characteristics should be equivalent in the study groups.
+
+###Counterfactuals
+
+You will have a chance to talk more about counterfactuals in discussion section this week.  
+
+We will also keep counterfactuals in mind when we discuss study designs and sampling in future lectures.
+
+##Counfounding 
+
+###Counfounding 
+Your book talks about "lurking variables" which Baldi & Moore define as:
+
+> A variable that is not among the explanatory or response variables in a study and yet may influence the
+interpretation of relationships among those variables.
+
+They also (pg 157) define confounding by saying:
+
+> Two variables (explanatory or lurking) are confounded when their effects on a response variable cannot be distinguished from each other.
+
+I strongly disagree with this definition. We will use a different definition in this class.
+
+###Definition of Counfounding 
+
+A relationship between your variable of interest (exposure, treatment) and your outcome of interest (disease status, health condition etc) is confounded when there is a variable that is associated with both the exposure and outcome, and is not on the causal pathway between the two.  
+
+Variables that are on the causal pathway are those that represent a way in which the exposure acts on the outcome.  For example, poor cognitive function would be on the causal pathway between lack of sleep and trying to pay for groceries with your library card.  
+
+### Discussion of Music example from Baldi & Moore
+
+**Example 4.7 "Nature, nuture, and lurking variables"** presents an 
+advertisement from the Michigan Symphony:
+
+"Question: Which students scored 51 points higher in verbal skills and 39 points 
+higher in math? 
+
+Answer: Students who had experience in music."
+
+Marketers often make leading statements that make their product or service sound
+appealing. The purpose of this ad was to have the target audience impute that 
+music causes higher marks at school because there is an association between 
+enrollment in music and higher marks. However, are students enrolled in music 
+lessons otherwise the same as students not enrolled in music lessons? What else
+do you expect to differ between these groups of students?
+
+### Discussion of some examples from Baldi & Moore
+We can encode these differences in a causal diagram. Here is a simple one to demonstrate the concept:
+```{r dag, echo=F, fig.height=1.5, fig.width=3}
+#students, you don't need to know the dagitty package or understand this code
+library(dagitty)
+
+g <- dagitty('dag {
+    Music.Lessons [pos="0,1"]
+    High.grades [pos="2,1"]
+    Family.income [pos="1,0.5"]
+    
+    Music.Lessons -> High.grades 
+    Family.income -> Music.Lessons
+    Family.income -> High.grades
+}')
+plot(g)
+```
+
+The direction of the arrows from the "Family Income" node makes explicit that we believe family 
+income to be a confounder of the relationship between taking music lessons and 
+achieving higher grades. It means that not only do these children take music 
+lessons, they also come from families with higher incomes, and higher incomes 
+lead to higher grades in other ways. Of course, family income is not the only 
+possible confounder. What are some others? 
+
+
+###Counfounding 
+In this course, we don't have time to go into methods that adjust for multiple variables or address how to control for confounding or other types of bias that limit causal interpretations. 
+
+However, know that causality can be studied using observational data and relies on clever study 
+designs and oftentimes on advanced methods. 
+
+You will also have a chance to talk more about confounding in discussion this week.
