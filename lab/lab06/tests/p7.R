@@ -13,11 +13,11 @@ name: p7
 "
 
 test_that("p7a", {
-  expect_true(all.equal(mean, 5.7, tol = 0.01))
+  expect_true(all.equal(mean_x, 5.7, tol = 0.01))
   print("Checking: value of mean")
 })
 
 test_that("p7b", {
-  expect_true(all.equal(sd, 2.3874, tol = 0.001))
+  expect_true(all.equal(sd_x, 2.3874, tol = 0.001))
   print("Checking: value of sd")
 })
