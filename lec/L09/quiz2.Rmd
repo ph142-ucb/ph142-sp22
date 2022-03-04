@@ -1,0 +1,110 @@
+---
+title: 'Quiz 2 '
+output: pdf_document
+date: "February 10, 2020"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+&nbsp;    
+
+First and last name (print clearly): _______________________________
+
+&nbsp;    
+&nbsp;    
+
+Student number (print clearly): _______________________________
+
+&nbsp; 
+
+###Question 1
+Read the following abstract from the American Journal of Epidemiology, Volume 185, Issue 3, 1 February 2017, Pages 203–211
+
+Abstract
+Face-to-face social interactions enhance well-being. With the ubiquity of social media, important questions have arisen about the impact of online social interactions. In the present study, we assessed the associations of both online and offline social networks with several subjective measures of well-being. We used 3 waves (2013, 2014, and 2015) of data from 5,208 subjects in the nationally representative Gallup Panel Social Network Study survey, including social network measures, in combination with objective measures of Facebook use. We investigated the associations of Facebook activity and real-world social network activity with self-reported physical health, self-reported mental health, self-reported life satisfaction, and body mass index. Our results showed that overall, the use of Facebook was negatively associated with well-being. For example, a 1-standard-deviation increase in “likes clicked” (clicking “like” on someone else's content), “links clicked” (clicking a link to another site or article), or “status updates” (updating one's own Facebook status) was associated with a decrease of 5%–8% of a standard deviation in self-reported mental health. These associations were robust to multivariate cross-sectional analyses, as well as to 2-wave prospective analyses. The negative associations of Facebook use were comparable to or greater in magnitude than the positive impact of offline interactions, which suggests a possible tradeoff between offline and online relationships.
+
+### 1.a) 
+Which of the following study design terms apply to this study (fill in the box for all that apply):
+
+$\Box$ A) Experimental
+
+$\Box$ B) Observational
+
+$\Box$ C) Blinded
+
+$\Box$ D) Case-Control
+
+### 1.b)
+Based on the information in the abstract, we would expect a correlation coefficient between "likes clicked" annd self-reported mental health score to be:
+
+
+$\Box$ A) Positive
+
+$\Box$ B) Negative
+
+$\Box$ C) Zero
+
+$\Box$ D) Not enough information provided
+
+###Question 2 
+The following output is from a linear model where diastolic blood pressure is used to predict systolic blood pressure.  Based on this output, write the equation for the line of best fit.
+
+```{r importnhanes, echo=F, message=F, warning=FALSE}
+library(readr)
+nhanes_dataNA <- read_csv("nhanes.csv")
+nhanes_data<-nhanes_dataNA[rowSums(is.na(nhanes_dataNA[ , 15:18])) == 0, ]
+library(broom)
+lm_nhanes<-lm(data=nhanes_dataNA,bpxsy1~bpxdi1 )
+tidy(lm_nhanes)
+```
+
+
+###Question 3 (fill in the boxes for all that apply)
+Which of the following are properties of the R -squared
+
+$\Box$ A) It must be between zero and 1
+
+$\Box$ B) It is robust to outliers
+
+$\Box$ C) It must be of the same sign as the correlation coefficient
+
+$\Box$ D) It does not change when the units of X are changed
+
+### Question 4
+The 2018 NBA finals champions were the Golden State Warriors. Klay Thompson and Draymond Green are two of the basketball players instrumental to this championship win. Below is a table summarizing how many points the player(s) made by a 3 point shot versus points made by all other types of shots during their final four games.
+
+| Points made by     |   Points made by 3 point shot    | All other points    | Total    |
+|--------------------|----------------------------------|---------------------|----------|
+| Klay Thompson      | 36                               | 28                  | 64       |
+| Draymond Green     |  9                               | 28                  | 37       |
+| All other Warriors | 108                              | 255                 | 363      |
+| Total              | 153                              | 311                 | 464      |
+
+What is the conditional probability that a point was made by 3 point shot if the point was made by Klay Thompson?
+
+\begin{table}[!htb]
+\begin{flushright}
+\begin{tabular}{lllll}
+\hline
+Your final answer here &  &  &  &  \\ \hline
+{[}1 point{]}          &  &  &  &  \\
+                       &  &  &  &  \\
+                       &  &  &  &  \\ \hline
+\end{tabular}
+\end{flushright}
+\end{table}
+
+
+
+
+###Question 5
+A confounder is:
+
+$\Box$ A) A lurking variable
+
+$\Box$ B) Caused by the exposure
+
+$\Box$ C) Associated with the outcome
+
+$\Box$ D) All of the above 
