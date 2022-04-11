@@ -1,0 +1,180 @@
+---
+title: "frog-regression-example"
+output: html_document
+---
+### Example from the text book
+
+Read in the data on frog mating call frequency and temperature:
+
+```{r, fig.align='center', out.width="80%"}
+library(tibble)
+
+frog_data <- tibble(id = 1:20,
+       temp = c(19, 21, 22, 22, 23, 23, 23, 23, 23, 
+                24, 24, 24, 24,
+                25, 25, 25, 25, 26, 26, 27),
+       freq = c(38, 42, 45, 45, 41, 45, 48, 50, 53, 51, 48, 53, 47,
+                53, 49, 56, 53, 55, 55, 54))
+```
+
+### Scatter plot
+```{r, fig.align='center', out.width="45%"}
+ggplot(frog_data, aes(x = temp, y = freq)) +
+  geom_point() +
+  theme_minimal(base_size = 15) +
+  labs(x = "Temperature (Celcius)", y = "Frequency of mating calls")
+```
+
+- Does the relationship look linear?
+- Is the relationship positive or negative?
+
+### Run the linear model
+```{r, echo=TRUE}
+frog_lm <- lm(formula = freq ~ temp, data = frog_data)
+tidy(frog_lm)
+glance(frog_lm)
+```
+
+### Check the model diagnostics
+
+```{r}
+frog_lm_augment <- augment(frog_lm)
+```
+
+- `augment()` is another `broom` function. It augments the original data frame
+with the residual (`.resid`) and fitted (`.fitted`) values, among other values
+that we won't talk about now.
+
+- Make sure to know the augment command!
+
+### Check the model diagnostics
+
+```{r, fig.align='center', out.width="80%"}
+ frog_resid<- ggplot(frog_lm_augment, aes(temp, freq)) +
+  geom_smooth(method = "lm", se = F) +
+  geom_point(alpha = 0.5) +
+  geom_segment(aes(xend = temp, yend = .fitted), lty = 2, alpha = 0.5) +
+  theme_minimal(base_size = 15) +
+  labs(title = "(a) Scatter plot")
+```
+
+### Check the model diagnostics:  residuals
+```{r resid, fig.align='center', out.width="80%", echo=FALSE}
+frog_resid
+```
+
+### Check the model diagnostics
+
+```{r, fig.align='center', out.width="80%"}
+# QQ plot
+  frog_qq<-ggplot(frog_lm_augment, aes(sample = .resid)) + 
+  geom_qq() + 
+  geom_qq_line() +
+  theme_minimal(base_size = 15) +
+  labs(y = "Residuals", x = "Theoretical quantiles", title = "(b) QQplot")
+
+```
+
+### Check the model diagnostics
+
+```{r, fig.align='center', out.width="80%", echo=FALSE}
+# QQ plot
+  frog_qq
+```
+
+### Check the model diagnostics
+
+```{r, fig.align='center', out.width="80%"}
+## Fitted vs. residuals
+  frog_fitresid<-ggplot(frog_lm_augment, aes(y = .resid, x = .fitted)) + 
+  geom_point() + 
+  theme_minimal(base_size = 15) +
+  geom_hline(aes(yintercept = 0)) +
+  labs(y = "Residuals", x = "Fitted values", title = "(c) Fitted vs. residuals") 
+
+```
+
+### Check the model diagnostics
+
+```{r, fig.align='center', out.width="80%", echo=FALSE}
+## Fitted vs. residuals
+  frog_fitresid
+```
+
+
+### Check the model diagnostics
+
+```{r, fig.align='center', out.width="80%"}
+## Amount explained
+frog_gather <- frog_lm_augment %>% select(freq, .resid) %>%
+  gather(key = "type", value = "value", freq, .resid)
+
+frog_expl<-ggplot(frog_gather, aes(y = value)) + 
+  geom_boxplot(aes(fill = type)) +
+  theme_minimal(base_size = 15) +
+  labs(title = "(d) Amount explained")
+```
+
+### Check the model diagnostics
+
+```{r, fig.align='center', out.width="80%", echo=FALSE}
+frog_expl
+```
+
+## testing and CI with linear regression models
+
+
+### Part III hypothesis testing in regression models
+
+- How can we account for the imprecision of only having a sample?
+- Confidence interval for the slope 
+- Hypothesis testing for the slope
+
+
+### Regression standard error
+All of our hypothesis tests are looking for the "signal" in the "noise".
+
+The "noise" here is the regression standard error, the variability around our regression line.
+
+### Regression standard error
+
+- A good-fitting model will have a low regression standard error because $\hat{y}$
+will be close to y. 
+- Look at $s$ after running a linear model to assess the model's fit to the data.
+- $s$ is on the same scale as y (i.e., they have the same units). 
+- `glance(your_lm)` prints $s$, denoted by `sigma`
+
+$$s = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n}{\hat{e}^2}}$$
+$$s = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n}{(y-\hat{y})^2}}$$
+
+
+### `glance()` to view the regression standard error in our frog data
+
+```{r}
+glance(frog_lm) 
+```
+
+- $sigma = 2.82$. This is the regression standard error.
+- It can be interpreted as an average measure of the absolute distance between 
+the observed and predicted response variable across all observations ($y$ and $\hat{y}$).
+
+### Another way to contextualize the regression standard error
+
+You can compute a five number summary on the residuals using the augmented data 
+frame:
+
+```{r}
+frog_lm_augment %>% summarise(min_resid = min(.resid),
+                            q25_resid = quantile(.resid, 0.25),
+                            mean_resid = mean(.resid),
+                            q75_resid = quantile(.resid, 0.75),
+                            max_resid = max(.resid))
+```
+
+
+### Another way to contextualize the regression standard error
+- The smallest residual is -6.42 and the largest is 5.58. 
+- The IQR for the residuals goes from -1.92 to 1.00. 
+- The mean residual is very close to 0.
+- **The residual standard error (2.82) is capturing the standard deviation of this
+distribution of residuals.** 
